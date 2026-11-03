@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jailbreak Car Values (Clean vs Duped)</title>
+<style>
+  :root {
+    --bg: #0f0f13;
+    --card: #1a1a22;
+    --border: #2a2a35;
+    --text: #e8e8f0;
+    --muted: #9a9ab0;
+    --accent: #6c5ce7;
+    --clean: #00b894;
+    --duped: #fd79a8;
+    --gold: #fdcb6e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+  header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+  }
+  h1 {
+    font-size: 1.9rem;
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .subtitle { color: var(--muted); font-size: 0.95rem; }
+  .warning {
+    background: #2d1b1b;
+    border: 1px solid #e17055;
+    color: #fab1a0;
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin: 20px 0;
+    font-size: 0.9rem;
+  }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  input[type="search"] {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-size: 1rem;
+  }
+  input[type="search"]:focus { outline: 2px solid var(--accent); }
+  .stats {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  th, td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    background: #12121a;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: sticky;
+    top: 0;
+  }
+  tr:hover { background: #22222c; }
+  .car-name { font-weight: 600; }
+  .clean { color: var(--clean); font-weight: 600; }
+  .duped { color: var(--duped); font-weight: 600; }
+  .tier {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .tier-s { background: #6c5ce7; color: white; }
+  .tier-a { background: #00b894; color: white; }
+  .tier-b { background: #fdcb6e; color: #2d3436; }
+  .tier-c { background: #636e72; color: white; }
+  footer {
+    text-align: center;
+    margin-top: 30px;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  @media (max-width: 700px) {
+    th, td { padding: 10px 8px; font-size: 0.9rem; }
+    .hide-mobile { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Jailbreak Car Values</h1>
+    <p class="subtitle">Clean vs Duped • Limited / Seasonal / Event Vehicles</p>
+    <p class="subtitle" style="margin-top:6px;">Data approx. late October – early November 2026</p>
+  </header>
+
+  <div class="warning">
+    Values fluctuate daily. Always verify on Jailbreak Trading Network, Jailbreak Changelogs, or JB Values before trading. This is a community estimate only — not official.
+  </div>
+
+  <div class="controls">
+    <input type="search" id="search" placeholder="Search car name..." oninput="filterTable()">
+    <span class="stats" id="count"></span>
+  </div>
+
+  <table id="valuesTable">
+    <thead>
+      <tr>
+        <th>Car</th>
+        <th>Clean Value</th>
+        <th>Duped Value</th>
+        <th class="hide-mobile">Tier</th>
+        <th class="hide-mobile">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- TOP TIER -->
+      <tr>
+        <td class="car-name">Javelin</td>
+        <td class="clean">48–55M</td>
+        <td class="duped">43–48M</td>
+        <td class="hide-mobile"><span class="tier tier-s">S+</span></td>
+        <td class="hide-mobile">Event exclusive (48h)</td>
+      </tr>
+      <tr>
+        <td class="car-name">Beignet</td>
+        <td class="clean">40–46.5M</td>
+        <td class="duped">37–41.5M</td>
+        <td class="hide-mobile"><span class="tier tier-s">S+</span></td>
+        <td class="hide-mobile">Season 6 Level 10</td>
+      </tr>
+      <tr>
+        <td class="car-name">Proto-8 / Proto-08</td>
+        <td class="clean">35–37M</td>
+        <td class="duped">32.5–35M</td>
+        <td class="hide-mobile"><span class="tier tier-s">S</span></td>
+        <td class="hide-mobile">Season 14 Level 10</td>
+      </tr>
+      <tr>
+        <td class="car-name">Torpedo</td>
+        <td class="clean">28–35M</td>
+        <td class="duped">~32.5M</td>
+        <td class="hide-mobile"><span class="tier tier-s">S</span></td>
+        <td class="hide-mobile">OG Season prize</td>
+      </tr>
+      <tr>
+        <td class="car-name">Power-1 / Power1</td>
+        <td class="clean">23–25M</td>
+        <td class="duped">~20–23M</td>
+        <td class="hide-mobile"><span class="tier tier-a">A+</span></td>
+        <td class="hide-mobile">High demand</td>
+      </tr>
+      <tr>
+        <td class="car-name">Celsior</td>
+        <td class="clean">25M</td>
+        <td class="duped">~22–24M</td>
+        <td class="hide-mobile"><span class="tier tier-a">A+</span></td>
+        <td class="hide-mobile">Strong demand</td>
+      </tr>
+      <tr>
+        <td class="car-name">ICEBreaker / Icebreaker</td>
+        <td class="clean">20M</td>
+        <td class="duped">~17–19M</td>
+        <td class="hide-mobile"><span class="tier tier-a">A</span></td>
+        <td class="hide-mobile">Seasonal</td>
+      </tr>
+      <tr>
+        <td class="car-name">Beam Hybrid</td>
+        <td class="clean">19M</td>
+        <td class="duped">~16–18M</td>
+        <td class="hide-mobile"><span class="tier tier-a">A</span></td>
+        <td class="hide-mobile">Very rare</td>
+      </tr>
+      <tr>
+        <td class="car-name">Banana Car</td>
+        <td class="clean">15–16M</td>
+        <td class="duped">~13–15M</td>
+        <td class="hide-mobile"><span class="tier tier-a">A</span></td>
+        <td class="hide-mobile">Fun / collector</td>
+      </tr>
+      <tr>
+        <td class="car-name">Arachnid</td>
+        <td class="clean">16–21.5M</td>
+        <td class="duped">~14–19M</td>
+        <td class="hide-mobile"><span class="tier tier-a">A</span></td>
+        <td class="hide-mobile">Off-road beast</td>
+      </tr>
+      <tr>
+        <td class="car-name">Molten M12</td>
+        <td class="clean">12–15M</td>
+        <td class="duped">~11–13.5M</td>
+        <td class="hide-mobile"><span class="tier tier-b">B+</span></td>
+        <td class="hide-mobile">Hot Wheels collab</td>
+      </tr>
+      <tr>
+        <td class="car-name">Raptor</td>
+        <td class="clean">10–12M</td>
+        <td class="duped">~9–11M</td>
+        <td class="hide-mobile"><span class="tier tier-b">B</span></td>
+        <td class="hide-mobile">Off-road</td>
+      </tr>
+      <tr>
+        <td class="car-name">Volt 4x4</td>
+        <td class="clean">9.5–12M</td>
+        <td class="duped">~9–11.5M</td>
+        <td class="hide-mobile"><span class="tier tier-b">B</span></td>
+        <td class="hide-mobile">Season 3 Level 10</td>
+      </tr>
+      <tr>
+        <td class="car-name">Parisian</td>
+        <td class="clean">9–11.5M</td>
+        <td class="duped">~9–11M</td>
+        <td class="hide-mobile"><span class="tier tier-b">B</span></td>
+        <td class="hide-mobile">Event exclusive</td>
+      </tr>
+      <tr>
+        <td class="car-name">Aperture</td>
+        <td class="clean">7–12M</td>
+        <td class="duped">~10–10.5M</td>
+        <td class="hide-mobile"><span class="tier tier-b">B</span></td>
+        <td class="hide-mobile">Rising trend</td>
+      </tr>
+      <tr>
+        <td class="car-name">Crew Capsule</td>
+        <td class="clean">8–14M</td>
+        <td class="duped">~8–12M</td>
+        <td class="hide-mobile"><span class="tier tier-b">B</span></td>
+        <td class="hide-mobile">Among Us reference</td>
+      </tr>
+      <tr>
+        <td class="car-name">Orion</td>
+        <td class="clean">3.5M</td>
+        <td class="duped">3M</td>
+        <td class="hide-mobile"><span class="tier tier-c">C</span></td>
+        <td class="hide-mobile">Event exclusive</td>
+      </tr>
+      <tr>
+        <td class="car-name">Poseidon</td>
+        <td class="clean">3.5M</td>
+        <td class="duped">3M</td>
+        <td class="hide-mobile"><span class="tier tier-c">C</span></td>
+        <td class="hide-mobile">Season 16 Level 10</td>
+      </tr>
+      <tr>
+        <td class="car-name">Bloxy</td>
+        <td class="clean">3.5M</td>
+        <td class="duped">3M</td>
+        <td class="hide-mobile"><span class="tier tier-c">C</span></td>
+        <td class="hide-mobile">Season 11 Level 10</td>
+      </tr>
+      <tr>
+        <td class="car-name">Cobra</td>
+        <td class="clean">3.5M</td>
+        <td class="duped">3M</td>
+        <td class="hide-mobile"><span class="tier tier-c">C</span></td>
+        <td class="hide-mobile">Season 26 Level 10</td>
+      </tr>
+      <tr>
+        <td class="car-name">Brick Kar-1</td>
+        <td class="clean">2.5M</td>
+        <td class="duped">~2–2.3M</td>
+        <td class="hide-mobile"><span class="tier tier-c">C</span></td>
+        <td class="hide-mobile">Season 29 Level 10</td>
+      </tr>
+      <tr>
+        <td class="car-name">Laviolette</td>
+        <td class="clean">250k–500k</td>
+        <td class="duped">100k–350k</td>
+        <td class="hide-mobile"><span class="tier tier-c">C</span></td>
+        <td class="hide-mobile">Recently dropped</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <footer>
+    <p>Made for personal use • Values are approximate community estimates</p>
+    <p style="margin-top:6px;">Always check live sites before trading. Happy trading!</p>
+  </footer>
+</div>
+
+<script>
+  function filterTable() {
+    const input = document.getElementById('search').value.toLowerCase();
+    const rows = document.querySelectorAll('#valuesTable tbody tr');
+    let visible = 0;
+    rows.forEach(row => {
+      const name = row.cells[0].textContent.toLowerCase();
+      if (name.includes(input)) {
+        row.style.display = '';
+        visible++;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+    document.getElementById('count').textContent = visible + ' cars shown';
+  }
+  // Initial count
+  filterTable();
+</script>
+</body>
+</html>
